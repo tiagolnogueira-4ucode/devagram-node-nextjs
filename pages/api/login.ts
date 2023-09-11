@@ -14,8 +14,8 @@ const ERRO_JWT = 'JWT não informado!';
 
 const autenticarUsuario = async (login: string, senha: string, MINHA_CHAVE_JWT: any) => {
     const usuarioEncontrado = await UsuarioModel.findOne({ email: login });
+
     if (usuarioEncontrado && await bcrypt.compare(senha, usuarioEncontrado.senha)) {
-        
         const token = jwt.sign({_id : usuarioEncontrado.id}, MINHA_CHAVE_JWT);
 
         return {usuarioEncontrado, token};
@@ -28,7 +28,7 @@ const endpointLogin = async (
     res: NextApiResponse<RespostaPadraoMsg | LoginResposta>
 ) => {
    
-    const MINHA_CHAVE_JWT = process.env;
+    const {MINHA_CHAVE_JWT} = process.env;
 
     if(!MINHA_CHAVE_JWT) {
         res.status(500).json({ erro: ERRO_JWT });
