@@ -4,6 +4,7 @@ import { conectarMongoDB } from '@/middlewares/conectaMongoDB';
 import { UsuarioModel } from "@/models/UsuarioModel";
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
 import nc from 'next-connect';
+import { politicaCORS } from "@/middlewares/politicaCors";
 
 const ERROS = {
     METODO_INVALIDO: 'Método informado não é válido!',
@@ -64,4 +65,4 @@ export const config = {
     }
 };
 
-export default validarTokenJWT(conectarMongoDB(handler));
+export default politicaCORS(validarTokenJWT(conectarMongoDB(handler))); 

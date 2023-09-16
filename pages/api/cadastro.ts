@@ -6,6 +6,7 @@ import { UsuarioModel } from '../../models/UsuarioModel';
 import bcrypt from 'bcrypt';
 import { upload, uploadImagemCosmic } from '../../services/uploadImagemCosmic';
 import nc from 'next-connect';
+import { politicaCORS } from "@/middlewares/politicaCors";
 
 // Constantes de erro
 const ERROS = {
@@ -61,4 +62,4 @@ export const config = {
     }
 }
 
-export default conectarMongoDB(handler);
+export default politicaCORS(conectarMongoDB(handler));

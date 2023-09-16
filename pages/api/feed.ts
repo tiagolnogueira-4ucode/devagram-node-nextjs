@@ -5,6 +5,7 @@ import { UsuarioModel } from "@/models/UsuarioModel";
 import { PublicacaoModel } from "@/models/PublicacaoModel";
 import type { RespostaPadraoMsg } from '../../types/RespostaPadraoMsg';
 import { SeguidorModel } from "@/models/SeguidorModel";
+import { politicaCORS } from "@/middlewares/politicaCors";
 
 type FeedResponse = { publicacoes?: typeof PublicacaoModel[] } & RespostaPadraoMsg;
 
@@ -54,4 +55,4 @@ const feedEndpoint = async (req: NextApiRequest, res: NextApiResponse<FeedRespon
     }
 }
 
-export default validarTokenJWT(conectarMongoDB(feedEndpoint));
+export default politicaCORS(validarTokenJWT(conectarMongoDB(feedEndpoint)));

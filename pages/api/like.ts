@@ -4,6 +4,7 @@ import { conectarMongoDB } from '@/middlewares/conectaMongoDB';
 import { PublicacaoModel } from "@/models/PublicacaoModel";
 import { UsuarioModel } from "@/models/UsuarioModel";
 import nc from 'next-connect';
+import { politicaCORS } from "@/middlewares/politicaCors";
 
 const ERROS = {
     PUBLICACAO_NAO_ENCONTRADA: 'Publicação não encontrada!',
@@ -50,4 +51,4 @@ export const config = {
     }
 };
 
-export default validarTokenJWT(conectarMongoDB(handler));
+export default politicaCORS(validarTokenJWT(conectarMongoDB(handler)));

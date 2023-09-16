@@ -4,6 +4,7 @@ import { conectarMongoDB } from '@/middlewares/conectaMongoDB';
 import { SeguidorModel } from "@/models/SeguidorModel";
 import { UsuarioModel } from "@/models/UsuarioModel";
 import nc from 'next-connect';
+import { politicaCORS } from "@/middlewares/politicaCors";
 
 const ERROS = {
     USUARIO_NAO_ENCONTRADO: 'Usuário não encontrado!',
@@ -54,4 +55,4 @@ export const config = {
     }
 };
 
-export default validarTokenJWT(conectarMongoDB(handler));
+export default politicaCORS(validarTokenJWT(conectarMongoDB(handler)));

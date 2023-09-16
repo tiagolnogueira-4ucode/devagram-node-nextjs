@@ -5,6 +5,7 @@ import type { LoginResposta } from '../../types/LoginResposta';
 import { UsuarioModel } from '../../models/UsuarioModel';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { politicaCORS } from "@/middlewares/politicaCors";
 
 // Constantes de erro
 const ERRO_AUTENTICACAO = 'Usuário ou senha não encontrado!';
@@ -52,4 +53,4 @@ const endpointLogin = async (
     }
 }
 
-export default conectarMongoDB(endpointLogin);
+export default politicaCORS(conectarMongoDB(endpointLogin));

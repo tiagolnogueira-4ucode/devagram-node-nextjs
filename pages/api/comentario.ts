@@ -4,6 +4,7 @@ import { conectarMongoDB } from '@/middlewares/conectaMongoDB';
 import { UsuarioModel } from "@/models/UsuarioModel";
 import { PublicacaoModel } from "@/models/PublicacaoModel";
 import type { RespostaPadraoMsg } from '../../types/RespostaPadraoMsg';
+import { politicaCORS } from "@/middlewares/politicaCors";
 
 type RespostaFeed = { publicacoes?: typeof PublicacaoModel[] } & RespostaPadraoMsg;
 
@@ -44,4 +45,4 @@ const tratarRequisicaoComentario = async (req: NextApiRequest, res: NextApiRespo
     }
 }
 
-export default validarTokenJWT(conectarMongoDB(tratarRequisicaoComentario));
+export default politicaCORS(validarTokenJWT(conectarMongoDB(tratarRequisicaoComentario)));
