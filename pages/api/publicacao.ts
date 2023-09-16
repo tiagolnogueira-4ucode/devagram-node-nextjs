@@ -48,6 +48,9 @@ const handler = nc<NextApiRequest, NextApiResponse<RespostaPadraoMsg>>()
                 data: new Date()
             });
 
+            usuario.publicacoes++;
+            UsuarioModel.findByIdAndUpdate(usuario._id, usuario);
+
             return res.status(200).json({ msg: 'Publicação criada com sucesso!' });
 
         } catch (error) {
